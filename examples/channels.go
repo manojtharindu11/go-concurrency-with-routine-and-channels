@@ -7,7 +7,7 @@ func calculate(ch chan int) {
 	ch <- result
 }
 
-func channelReceiving() {
+func ChannelReceiving() {
 	ch := make(chan int)
 
 	go calculate(ch)

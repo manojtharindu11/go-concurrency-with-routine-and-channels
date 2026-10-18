@@ -9,7 +9,7 @@ func sayHello() {
 	fmt.Println("Hello from the function")
 }
 
-func routineExample() {
+func RoutineExample() {
 	go sayHello()
 
 	time.Sleep(time.Second)
