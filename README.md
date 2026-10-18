@@ -1,8 +1,9 @@
-# Go Concurrency Examples
+# Go Concurrency with Goroutines and Channels
 
-A small Go project for studying concurrency fundamentals through focused,
-runnable examples. The examples cover goroutines, channels, wait groups,
-worker pools, and the producer-consumer pattern.
+Hands-on Go examples for learning goroutines, channels, wait groups, worker
+pools, and the producer-consumer pattern.
+
+Repository: [manojtharindu11/go-concurrency-with-routine-and-channels](https://github.com/manojtharindu11/go-concurrency-with-routine-and-channels)
 
 ## Requirements
 
@@ -13,6 +14,13 @@ Check your installed Go version with:
 ```bash
 go version
 ```
+
+## GitHub topics
+
+Suggested repository topics:
+
+`go` `golang` `concurrency` `goroutines` `channels` `waitgroup`
+`producer-consumer` `worker-pool` `go-examples` `learning-go`
 
 ## Project structure
 
