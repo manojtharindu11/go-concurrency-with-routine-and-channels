@@ -1,13 +1,25 @@
 # Go Concurrency Examples
 
-Small, runnable examples for learning goroutines, channels, wait groups, and
-the producer-consumer pattern in Go.
+A small Go project for studying concurrency fundamentals through focused,
+runnable examples. The examples cover goroutines, channels, wait groups,
+worker pools, and the producer-consumer pattern.
 
-## Project layout
+## Requirements
+
+- Go 1.27.1 or newer
+
+Check your installed Go version with:
+
+```bash
+go version
+```
+
+## Project structure
 
 ```text
-.
+go-concurrency/
 ├── main.go
+├── go.mod
 └── examples/
     ├── channels.go
     ├── combined.go
@@ -16,44 +28,75 @@ the producer-consumer pattern in Go.
     └── waitgroups.go
 ```
 
-The root `main.go` selects the example to run. The example implementations are
-kept in the `examples` package so each topic can be studied independently.
+The root `main.go` is the program entry point. The learning examples are
+organized in the `examples` package and expose one exported function each.
 
-## Run the current example
+## Run the project
 
-From the project root:
+From the repository root:
 
 ```bash
 go run .
 ```
 
-The current entry point runs `examples.JobHandler`, which demonstrates:
+The default entry point runs the producer-consumer example:
 
-- A producer sending jobs through a channel.
-- A consumer receiving jobs with a receive-only channel.
-- Closing a channel after production is complete.
-- Waiting for the consumer with `sync.WaitGroup`.
+```text
+Producing jobs: 1
+Consuming job: 1
+...
+Consumer finished
+Program finished
+```
 
-## Try another example
+The order of producer and consumer messages can vary because both operations
+run concurrently.
 
-Change the function called in `main.go` to one of the exported examples:
+## Available examples
+
+| Function | File | Concepts |
+| --- | --- | --- |
+| `RoutineExample` | `examples/goroutines.go` | Starting a goroutine |
+| `ChannelReceiving` | `examples/channels.go` | Sending and receiving values through a channel |
+| `WaitGroupTask` | `examples/waitgroups.go` | Waiting for multiple goroutines |
+| `WorkerWorks` | `examples/combined.go` | Worker pool, jobs, results, and channel closing |
+| `JobHandler` | `examples/producerconsumer.go` | Producer-consumer coordination |
+
+To run a different example, change the function called from `main.go`. For
+example:
 
 ```go
-examples.RoutineExample()
-examples.ChannelReceiving()
-examples.WaitGroupTask()
-examples.WorkerWorks()
-examples.JobHandler()
+func main() {
+    examples.WorkerWorks()
+}
 ```
 
-Then run the project again:
+Then run:
 
 ```bash
 go run .
 ```
 
-## Test all packages
+## Key ideas demonstrated
+
+- A goroutine runs a function concurrently with the calling code.
+- An unbuffered channel synchronizes a sender and receiver.
+- A buffered channel can hold values until a receiver is ready.
+- Directional channel types document whether a function sends or receives.
+- Closing a channel tells receivers that no more values will be sent.
+- `sync.WaitGroup` waits for a group of goroutines to finish.
+- Results should be collected only after workers have finished sending them.
+
+## Test and format
+
+Run all package tests:
 
 ```bash
 go test ./...
+```
+
+Format all Go source files:
+
+```bash
+gofmt -w main.go examples/*.go
 ```
